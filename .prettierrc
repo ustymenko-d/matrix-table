@@ -1,7 +1,8 @@
 {
-  "useTabs": true,
-  "singleQuote": true,
-  "trailingComma": "es5",
-  "jsxSingleQuote": true,
-  "bracketSameLine": true
+	"useTabs": true,
+	"singleQuote": true,
+	"trailingComma": "es5",
+	"jsxSingleQuote": true,
+	"bracketSameLine": true,
+	"plugins": ["prettier-plugin-tailwindcss"]
 }
