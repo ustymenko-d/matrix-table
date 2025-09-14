@@ -1,57 +1,83 @@
-import { type ReactNode, useState } from 'react';
+import { type ReactNode, useCallback, useMemo, useState } from 'react';
 
 import { TableContext } from '@/context/TableContext';
 import useMatrixContext from '@/hooks/useMatrixContext';
-import type { TableParams } from '@/types/matrix';
-import type { Cell, CellId } from '@/types/table';
+import type { Cell, CellId, TableParams } from '@/types/table';
 import { generateId } from '@/utils/generateId';
 import { randomThreeDigit } from '@/utils/randomThreeDigit';
 
 const TableContextProvider = ({ children }: { children: ReactNode }) => {
-	const { matrix, setMatrix } = useMatrixContext();
+	const { setMatrix } = useMatrixContext();
 
 	const [tableParams, setTableParams] = useState<TableParams | null>(null);
+	const [hoveredSumRow, setHoveredSumRow] = useState<number | null>(null);
+	const [hoveredCell, setHoveredCell] = useState<Cell | null>(null);
+	const [highlightedIds, setHighlightedIds] = useState<CellId[]>([]);
 
-	function incrementCellById(id: CellId) {
-		const updatedMatrix = matrix.map((row) =>
-			row.map((cell) =>
-				cell.id === id ? { ...cell, amount: cell.amount + 1 } : cell
-			)
-		);
+	const incrementCellByIndex = useCallback(
+		(rowIdx: number, colIdx: number) => {
+			setMatrix((prev) => {
+				const newMatrix = [...prev];
+				const newRow = [...newMatrix[rowIdx]];
+				const cell = newRow[colIdx];
 
-		setMatrix(updatedMatrix);
-	}
+				newRow[colIdx] = { ...cell, amount: cell.amount + 1 };
+				newMatrix[rowIdx] = newRow;
+				return newMatrix;
+			});
+		},
+		[setMatrix]
+	);
 
-	function addRow() {
+	const addRow = useCallback(() => {
 		if (!tableParams || tableParams.M >= 100) return;
 
-		const newRow: Cell[] = [];
+		const newRow = Array.from({ length: tableParams.N }, () => ({
+			id: generateId(),
+			amount: randomThreeDigit(),
+		}));
 
-		for (let c = 0; c < tableParams.N; c++) {
-			newRow.push({ id: generateId(), amount: randomThreeDigit() });
-		}
+		setMatrix((prev) => [...prev, newRow]);
+		setTableParams((prev) => prev && { ...prev, M: prev.M + 1 });
+	}, [tableParams, setMatrix]);
 
-		setTableParams({ ...tableParams, M: tableParams.M + 1 });
-		setMatrix([...matrix, newRow]);
-	}
+	const removeRow = useCallback(
+		(rowIndex: number) => {
+			if (!tableParams || tableParams.M <= 0) return;
 
-	function removeRow(rowIndex: number) {
-		const updatedMatrix = matrix.map((row) =>
-			row.filter((_, i) => i !== rowIndex)
-		);
+			setMatrix((prev) => prev.filter((_, i) => i !== rowIndex));
+			setTableParams((prev) => prev && { ...prev, M: prev.M - 1 });
+		},
+		[tableParams, setMatrix]
+	);
 
-		setMatrix(updatedMatrix);
-	}
+	const contextValue = useMemo(
+		() => ({
+			tableParams,
+			hoveredSumRow,
+			hoveredCell,
+			highlightedIds,
+			setTableParams,
+			setHoveredSumRow,
+			setHoveredCell,
+			setHighlightedIds,
+			incrementCellByIndex,
+			addRow,
+			removeRow,
+		}),
+		[
+			tableParams,
+			hoveredSumRow,
+			hoveredCell,
+			highlightedIds,
+			incrementCellByIndex,
+			addRow,
+			removeRow,
+		]
+	);
 
 	return (
-		<TableContext.Provider
-			value={{
-				tableParams,
-				setTableParams,
-				addRow,
-				removeRow,
-				incrementCellById,
-			}}>
+		<TableContext.Provider value={contextValue}>
 			{children}
 		</TableContext.Provider>
 	);

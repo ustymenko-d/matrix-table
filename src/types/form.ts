@@ -6,7 +6,7 @@ export type Step = 1 | 2;
 export type FirstStepValues = z.infer<typeof FormValidation.firstStep>;
 export type SecondStepValues = z.infer<typeof FormValidation.secondStep>;
 
-export type FormContext = {
+export type TFormContext = {
 	step: Step;
 	rows: number;
 	cols: number;

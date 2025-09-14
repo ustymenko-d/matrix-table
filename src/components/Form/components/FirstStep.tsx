@@ -8,9 +8,10 @@ const FirstStep = () => {
 		useFormContext();
 
 	return (
-		<div className='grid grid-cols-2 gap-x-4 gap-y-6'>
+		<div className='grid gap-4'>
 			<Label text='Number of Rows:'>
 				<Input
+					autoFocus
 					type='number'
 					min={1}
 					max={100}
@@ -20,7 +21,7 @@ const FirstStep = () => {
 				/>
 			</Label>
 
-			<Label text='Number of Columns:'>
+			<Label text='Number of Columns:' className='mb-2'>
 				<Input
 					type='number'
 					min={1}

@@ -9,7 +9,7 @@ const Form = () => {
 
 	return (
 		<section className='my-12 px-4'>
-			<div className='flex max-w-lg flex-col gap-8'>
+			<div className='flex max-w-xs flex-col gap-8'>
 				<Stepper />
 				<form
 					onSubmit={(e) => {

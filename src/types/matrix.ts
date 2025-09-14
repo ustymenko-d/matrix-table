@@ -1,15 +1,12 @@
-import type { Cell } from './table';
+import type { Dispatch, SetStateAction } from 'react';
 
-export type TableParams = {
-	M: number; // rows
-	N: number; // cols
-	X: number; // nearest count
-};
+import type { Cell } from './table';
 
 export type Matrix = Cell[][];
 
-export type MatrixContext = {
+export type TMatrixContext = {
 	matrix: Matrix;
-	setMatrix: (matrix: Matrix) => void;
+	rowMaxVals: number[];
+	setMatrix: Dispatch<SetStateAction<Matrix>>;
 	generateMatrix: (rows: number, cols: number) => void;
 };

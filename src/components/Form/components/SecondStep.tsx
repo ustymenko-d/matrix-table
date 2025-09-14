@@ -8,11 +8,12 @@ const SecondStep = () => {
 	const { maxX, x, secondStepErrors, setX, goPrevStep } = useFormContext();
 
 	return (
-		<div className='grid grid-cols-2 gap-x-4 gap-y-6'>
+		<div className='grid gap-4'>
 			<Label
 				text='Number of cells where amount is closest to the amount of hovered cell:'
-				className='max-sm:col-span-2'>
+				className='mb-2 max-sm:col-span-2'>
 				<Input
+					autoFocus
 					type='number'
 					min={1}
 					max={maxX}
@@ -22,6 +23,8 @@ const SecondStep = () => {
 				/>
 			</Label>
 
+			<Button type='submit'>Generate Table</Button>
+
 			<Button
 				type='button'
 				variant='secondary'
@@ -29,8 +32,6 @@ const SecondStep = () => {
 				className='col-start-1'>
 				Previous Step
 			</Button>
-
-			<Button type='submit'>Generate Table</Button>
 		</div>
 	);
 };

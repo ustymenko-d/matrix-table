@@ -1,4 +1,4 @@
-import { type ReactNode, useState } from 'react';
+import { type ReactNode, useCallback, useMemo, useState } from 'react';
 
 import { MatrixContext } from '@/context/MatrixContext';
 import type { Matrix } from '@/types/matrix';
@@ -9,8 +9,13 @@ import { randomThreeDigit } from '@/utils/randomThreeDigit';
 const MatrixContextProvider = ({ children }: { children: ReactNode }) => {
 	const [matrix, setMatrix] = useState<Matrix>([]);
 
-	function generateMatrix(rows: number, cols: number) {
-		const matrix: Matrix = [];
+	const rowMaxVals = useMemo<number[]>(
+		() => matrix.map((row) => Math.max(...row.map((cell) => cell.amount), 1)),
+		[matrix]
+	);
+
+	const generateMatrix = useCallback((rows: number, cols: number) => {
+		const newMatrix: Matrix = [];
 
 		for (let r = 0; r < rows; r++) {
 			const row: Cell[] = [];
@@ -19,19 +24,24 @@ const MatrixContextProvider = ({ children }: { children: ReactNode }) => {
 				row.push({ id: generateId(), amount: randomThreeDigit() });
 			}
 
-			matrix.push(row);
+			newMatrix.push(row);
 		}
 
-		setMatrix(matrix);
-	}
+		setMatrix(newMatrix);
+	}, []);
+
+	const contextValue = useMemo(
+		() => ({
+			matrix,
+			rowMaxVals,
+			setMatrix,
+			generateMatrix,
+		}),
+		[matrix, rowMaxVals, generateMatrix]
+	);
 
 	return (
-		<MatrixContext.Provider
-			value={{
-				matrix,
-				setMatrix,
-				generateMatrix,
-			}}>
+		<MatrixContext.Provider value={contextValue}>
 			{children}
 		</MatrixContext.Provider>
 	);

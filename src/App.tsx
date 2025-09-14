@@ -7,7 +7,7 @@ function App() {
 	const { tableParams } = useTableContext();
 
 	return (
-		<main className='container min-h-screen mx-auto'>
+		<main className='container mx-auto min-h-screen'>
 			<Welcome />
 			{tableParams ? <Table /> : <Form />}
 		</main>
