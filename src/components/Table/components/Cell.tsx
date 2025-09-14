@@ -33,7 +33,6 @@ const Cell = ({ cell, rowMax, rowIdx, colIdx, displayPercent }: Props) => {
 		<td
 			data-row={rowIdx}
 			data-col={colIdx}
-			title={`id: ${id}`}
 			onClick={handleClick}
 			className={clsx(
 				amount < 999 ? 'cursor-pointer' : 'cursor-not-allowed',

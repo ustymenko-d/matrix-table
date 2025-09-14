@@ -15,8 +15,7 @@ const Form = () => {
 					onSubmit={(e) => {
 						e.preventDefault();
 						validateAndSubmit();
-					}}
-					noValidate>
+					}}>
 					{step === 1 ? <FirstStep /> : <SecondStep />}
 				</form>
 			</div>

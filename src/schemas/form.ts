@@ -1,24 +1,20 @@
 import z from 'zod/v3';
 
 const firstStep = z.object({
-	rows: z
+	rows: z.coerce
 		.number({ required_error: 'Rows number is required' })
 		.int()
-		.min(1, 'Rows must be at least 1')
-		.max(100, 'Rows cannot exceed 100'),
-	cols: z
+		.min(1)
+		.max(100),
+	cols: z.coerce
 		.number({ required_error: 'Cols number is required' })
 		.int()
-		.min(1, 'Cols must be at least 1')
-		.max(100, 'Cols cannot exceed 100'),
+		.min(1)
+		.max(100),
 });
 
 const secondStep = z.object({
-	x: z
-		.number({ required_error: 'X is required' })
-		.int()
-		.min(1, 'X must be at least 1')
-		.refine((val) => val >= 1, { message: 'X must be at least 1' }),
+	x: z.coerce.number({ required_error: 'X is required' }).int().min(1),
 });
 
 export const FormValidation = {

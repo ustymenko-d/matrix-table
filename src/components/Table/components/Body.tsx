@@ -43,7 +43,7 @@ const Body = () => {
 						})}
 						<td
 							data-row-sum={rowIdx}
-							className='font-medium bg-muted'
+							className='bg-muted font-medium'
 							title={`Sum: ${rowSum}`}>
 							{rowSum}
 						</td>

@@ -2,7 +2,7 @@ import useFormContext from '@/hooks/useFormContext';
 import Button from '@/ui/Button';
 import Input from '@/ui/Input';
 import Label from '@/ui/Label';
-import { clamp } from '@/utils/clamp';
+import { handleNumberInputChange } from '@/utils/handleNumberInput';
 
 const SecondStep = () => {
 	const { maxX, x, secondStepErrors, step, setX, goPrevStep } =
@@ -19,7 +19,7 @@ const SecondStep = () => {
 					min={1}
 					max={maxX}
 					value={x}
-					onChange={(e) => setX(clamp(+e.target.value, 1, maxX))}
+					onInput={handleNumberInputChange(setX, 1, maxX)}
 					errors={secondStepErrors.x}
 				/>
 			</Label>

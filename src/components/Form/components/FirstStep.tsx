@@ -2,6 +2,7 @@ import useFormContext from '@/hooks/useFormContext';
 import Button from '@/ui/Button';
 import Input from '@/ui/Input';
 import Label from '@/ui/Label';
+import { handleNumberInputChange } from '@/utils/handleNumberInput';
 
 const FirstStep = () => {
 	const { rows, cols, firstStepErrors, setRows, setCols, goNextStep } =
@@ -16,7 +17,7 @@ const FirstStep = () => {
 					min={1}
 					max={100}
 					value={rows}
-					onChange={(e) => setRows(+e.target.value)}
+					onInput={handleNumberInputChange(setRows)}
 					errors={firstStepErrors.rows}
 				/>
 			</Label>
@@ -27,7 +28,7 @@ const FirstStep = () => {
 					min={1}
 					max={100}
 					value={cols}
-					onChange={(e) => setCols(+e.target.value)}
+					onInput={handleNumberInputChange(setCols)}
 					errors={firstStepErrors.cols}
 				/>
 			</Label>
