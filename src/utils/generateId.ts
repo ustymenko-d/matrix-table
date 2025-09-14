@@ -1,4 +1,4 @@
-import type { CellId } from '@/types/cell';
+import type { CellId } from '@/types/table';
 
 let globalId: CellId = 1;
 

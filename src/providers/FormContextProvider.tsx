@@ -3,11 +3,13 @@ import z from 'zod/v3';
 
 import { FormContext } from '@/context/FormContext';
 import useMatrixContext from '@/hooks/useMatrixContext';
+import useTableContext from '@/hooks/useTableContext';
 import { FormValidation } from '@/schemas/form';
 import type { Step } from '@/types/form';
 
 const FormContextProvider = ({ children }: { children: ReactNode }) => {
-	const { setTableParams, generateMatrix } = useMatrixContext();
+	const { setTableParams } = useTableContext();
+	const { generateMatrix } = useMatrixContext();
 
 	const [step, setStep] = useState<Step>(1);
 	const [rows, setRows] = useState<number>(1);

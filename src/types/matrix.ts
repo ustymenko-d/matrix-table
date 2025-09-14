@@ -1,4 +1,4 @@
-import type { Cell, CellId } from './cell';
+import type { Cell } from './table';
 
 export type TableParams = {
 	M: number; // rows
@@ -9,12 +9,7 @@ export type TableParams = {
 export type Matrix = Cell[][];
 
 export type MatrixContext = {
-	tableParams: TableParams | null;
 	matrix: Matrix;
-	setTableParams: (tableParams: TableParams) => void;
 	setMatrix: (matrix: Matrix) => void;
 	generateMatrix: (rows: number, cols: number) => void;
-	addRow: () => void;
-	removeRow: (row: number) => void;
-	incrementCellById: (id: CellId) => void;
 };

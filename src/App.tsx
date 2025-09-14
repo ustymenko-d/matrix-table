@@ -1,13 +1,13 @@
 import Form from '@/components/Form/Form';
 import Table from '@/components/Table/Table';
 import Welcome from '@/components/Welcome';
-import useMatrixContext from '@/hooks/useMatrixContext';
+import useTableContext from '@/hooks/useTableContext';
 
 function App() {
-	const { tableParams } = useMatrixContext();
+	const { tableParams } = useTableContext();
 
 	return (
-		<main className='container mx-auto min-h-screen'>
+		<main className='container min-h-screen mx-auto'>
 			<Welcome />
 			{tableParams ? <Table /> : <Form />}
 		</main>
