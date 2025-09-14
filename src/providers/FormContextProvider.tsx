@@ -65,7 +65,7 @@ const FormContextProvider = ({ children }: { children: ReactNode }) => {
 
 		setTableParams({ M: rows, N: cols, X: x });
 		generateMatrix(rows, cols);
-		setStep(1);
+		setStep('Done');
 	}, [rows, cols, x, maxX, generateMatrix, setTableParams]);
 
 	const contextValue = useMemo(
@@ -78,6 +78,7 @@ const FormContextProvider = ({ children }: { children: ReactNode }) => {
 			maxX,
 			firstStepErrors,
 			secondStepErrors,
+			setStep,
 			setRows,
 			setCols,
 			setX,

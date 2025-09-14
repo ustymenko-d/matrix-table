@@ -8,11 +8,11 @@ const Stepper = () => {
 		<div className='flex flex-wrap items-center gap-20'>
 			<Step
 				isActive={step === 1}
-				isCompleted={step > 1}
+				isCompleted={step === 2 || step === 'Done'}
 				label='1'
 				withConnector
 			/>
-			<Step isActive={step === 2} isCompleted={false} label='2' />
+			<Step isActive={step === 2} isCompleted={step === 'Done'} label='2' />
 		</div>
 	);
 };

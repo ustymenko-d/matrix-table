@@ -1,3 +1,4 @@
+import useFormContext from '@/hooks/useFormContext';
 import useMatrixContext from '@/hooks/useMatrixContext';
 import useTableContext from '@/hooks/useTableContext';
 import Button from '@/ui/Button';
@@ -8,6 +9,7 @@ import Head from './components/Head';
 const Table = () => {
 	const { addRow, setTableParams } = useTableContext();
 	const { setMatrix } = useMatrixContext();
+	const { setStep } = useFormContext();
 
 	return (
 		<section className='my-12 px-4'>
@@ -28,6 +30,7 @@ const Table = () => {
 						onClick={() => {
 							setMatrix([]);
 							setTableParams(null);
+							setStep(1);
 						}}>
 						Delete Table
 					</Button>

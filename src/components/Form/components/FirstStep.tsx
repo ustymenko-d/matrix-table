@@ -32,9 +32,7 @@ const FirstStep = () => {
 				/>
 			</Label>
 
-			<Button onClick={goNextStep} className='max-sm:col-span-2'>
-				Next Step
-			</Button>
+			<Button onClick={goNextStep}>Next Step</Button>
 		</div>
 	);
 };

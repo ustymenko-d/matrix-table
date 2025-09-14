@@ -5,13 +5,14 @@ import Label from '@/ui/Label';
 import { clamp } from '@/utils/clamp';
 
 const SecondStep = () => {
-	const { maxX, x, secondStepErrors, setX, goPrevStep } = useFormContext();
+	const { maxX, x, secondStepErrors, step, setX, goPrevStep } =
+		useFormContext();
 
 	return (
 		<div className='grid gap-4'>
 			<Label
 				text='Number of cells where amount is closest to the amount of hovered cell:'
-				className='mb-2 max-sm:col-span-2'>
+				className='mb-2'>
 				<Input
 					autoFocus
 					type='number'
@@ -23,12 +24,15 @@ const SecondStep = () => {
 				/>
 			</Label>
 
-			<Button type='submit'>Generate Table</Button>
+			<Button type='submit' disabled={step === 'Done'}>
+				Generate Table
+			</Button>
 
 			<Button
 				type='button'
 				variant='secondary'
 				onClick={goPrevStep}
+				disabled={step === 'Done'}
 				className='col-start-1'>
 				Previous Step
 			</Button>
