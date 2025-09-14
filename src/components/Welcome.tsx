@@ -1,5 +1,5 @@
 const Welcome = () => (
-	<section className='my-12 px-4'>
+	<section className='mb-12 px-4 pt-12'>
 		<div className='flex max-w-xl flex-col gap-2'>
 			<h1 className='mb-2 text-4xl font-bold text-foreground'>
 				Welcome to Matrix{'\u00A0'}Table
