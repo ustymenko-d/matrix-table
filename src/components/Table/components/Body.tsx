@@ -27,7 +27,7 @@ const Body = () => {
 						{row.map((cell, idx) => {
 							const displayPercent =
 								hoveredSumRow === rowIdx
-									? `${Math.round((cell.amount / rowSum) * 100)}%`
+									? `${((cell.amount / rowSum) * 100).toFixed(1)}%`
 									: null;
 
 							return (
@@ -43,7 +43,7 @@ const Body = () => {
 						})}
 						<td
 							data-row-sum={rowIdx}
-							className='bg-muted font-medium'
+							className='font-medium bg-muted'
 							title={`Sum: ${rowSum}`}>
 							{rowSum}
 						</td>
