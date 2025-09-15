@@ -48,7 +48,10 @@ const Body = () => {
 							{rowSum}
 						</td>
 						<td>
-							<Button variant='destructive' onClick={() => removeRow(rowIdx)}>
+							<Button
+								icon
+								variant='destructive'
+								onClick={() => removeRow(rowIdx)}>
 								<Trash2 />
 							</Button>
 						</td>

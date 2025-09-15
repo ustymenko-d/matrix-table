@@ -7,37 +7,32 @@ export default {
 	theme: {
 		extend: {
 			colors: {
-				background: 'var(--background)',
-				foreground: 'var(--foreground)',
+				background: 'rgb(var(--background) / <alpha-value>)',
+				foreground: 'rgb(var(--foreground) / <alpha-value>)',
 
 				primary: {
-					DEFAULT: 'var(--primary)',
-					foreground: 'var(--primary-foreground)',
+					DEFAULT: 'rgb(var(--primary) / <alpha-value>)',
+					foreground: 'rgb(var(--primary-foreground) / <alpha-value>)',
 				},
-
 				secondary: {
-					DEFAULT: 'var(--secondary)',
-					foreground: 'var(--secondary-foreground)',
+					DEFAULT: 'rgb(var(--secondary) / <alpha-value>)',
+					foreground: 'rgb(var(--secondary-foreground) / <alpha-value>)',
 				},
-
 				muted: {
-					DEFAULT: 'var(--muted)',
-					foreground: 'var(--muted-foreground)',
+					DEFAULT: 'rgb(var(--muted) / <alpha-value>)',
+					foreground: 'rgb(var(--muted-foreground) / <alpha-value>)',
 				},
-
 				accent: {
-					DEFAULT: 'var(--accent)',
-					foreground: 'var(--accent-foreground)',
+					DEFAULT: 'rgb(var(--accent) / <alpha-value>)',
+					foreground: 'rgb(var(--accent-foreground) / <alpha-value>)',
 				},
-
 				destructive: {
-					DEFAULT: 'var(--destructive)',
-					foreground: 'var(--destructive-foreground)',
+					DEFAULT: 'rgb(var(--destructive) / <alpha-value>)',
+					foreground: 'rgb(var(--destructive-foreground) / <alpha-value>)',
 				},
 
-				ring: 'var(--ring)',
-
-				border: 'var(--border)',
+				ring: 'rgb(var(--ring) / <alpha-value>)',
+				border: 'rgb(var(--border) / <alpha-value>)',
 			},
 		},
 	},
