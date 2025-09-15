@@ -1,11 +1,15 @@
 import { createContext } from 'react';
 import type z from 'zod/v3';
 
-import type { FormValidation } from '@/schemas/form';
+import type { FormValidation } from '@/components/Form/form.schema';
 
 export type Step = 1 | 2 | 'Done';
+
 export type FirstStepValues = z.infer<typeof FormValidation.firstStep>;
 export type SecondStepValues = z.infer<typeof FormValidation.secondStep>;
+
+export type FirstStepErrors = Partial<Record<keyof FirstStepValues, string>>;
+export type SecondStepErrors = Partial<Record<keyof SecondStepValues, string>>;
 
 export type TFormContext = {
 	step: Step;

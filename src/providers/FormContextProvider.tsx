@@ -1,9 +1,16 @@
 import { type ReactNode, useCallback, useMemo, useState } from 'react';
 
-import { FormContext, type Step } from '@/context/FormContext';
+import { FormValidation } from '@/components/Form/form.schema';
+import {
+	type FirstStepErrors,
+	type FirstStepValues,
+	FormContext,
+	type SecondStepErrors,
+	type SecondStepValues,
+	type Step,
+} from '@/context/FormContext';
 import useMatrixContext from '@/hooks/useMatrixContext';
 import useTableContext from '@/hooks/useTableContext';
-import { FormValidation } from '@/schemas/form';
 import { mapZodErrors } from '@/utils/mapZodErrors';
 
 const FormContextProvider = ({ children }: { children: ReactNode }) => {
@@ -11,16 +18,14 @@ const FormContextProvider = ({ children }: { children: ReactNode }) => {
 	const { generateMatrix } = useMatrixContext();
 
 	const [step, setStep] = useState<Step>(1);
-	const [rows, setRows] = useState<number>(1);
-	const [cols, setCols] = useState<number>(1);
-	const [x, setX] = useState<number>(1);
+	const [rows, setRows] = useState<FirstStepValues['rows']>(1);
+	const [cols, setCols] = useState<FirstStepValues['cols']>(1);
+	const [x, setX] = useState<SecondStepValues['x']>(1);
 
-	const [firstStepErrors, setFirstStepErrors] = useState<
-		Record<string, string>
-	>({});
-	const [secondStepErrors, setSecondStepErrors] = useState<
-		Record<string, string>
-	>({});
+	const [firstStepErrors, setFirstStepErrors] = useState<FirstStepErrors>({});
+	const [secondStepErrors, setSecondStepErrors] = useState<SecondStepErrors>(
+		{}
+	);
 
 	const totalCells = useMemo(() => rows * cols, [rows, cols]);
 	const maxX = useMemo(
@@ -30,10 +35,13 @@ const FormContextProvider = ({ children }: { children: ReactNode }) => {
 
 	const goNextStep = useCallback(() => {
 		setFirstStepErrors({});
-		const result = FormValidation.firstStep.safeParse({ rows, cols });
+		const result = FormValidation.firstStep.safeParse({
+			rows,
+			cols,
+		} satisfies FirstStepValues);
 
 		if (!result.success) {
-			setFirstStepErrors(mapZodErrors(result.error));
+			setFirstStepErrors(mapZodErrors<FirstStepValues>(result.error));
 			return;
 		}
 
@@ -50,10 +58,12 @@ const FormContextProvider = ({ children }: { children: ReactNode }) => {
 
 	const validateAndSubmit = useCallback(() => {
 		setSecondStepErrors({});
-		const result = FormValidation.secondStep.safeParse({ x });
+		const result = FormValidation.secondStep.safeParse({
+			x,
+		} satisfies SecondStepValues);
 
 		if (!result.success) {
-			setSecondStepErrors(mapZodErrors(result.error));
+			setSecondStepErrors(mapZodErrors<SecondStepValues>(result.error));
 			return;
 		}
 
