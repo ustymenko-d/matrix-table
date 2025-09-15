@@ -22,7 +22,7 @@ const Body = () => {
 				const rowSum = row.reduce((sum, cell) => sum + cell.amount, 0);
 
 				return (
-					<tr key={row[0].id} className='border-x border-muted'>
+					<tr key={row[0].id} className='select-none border-x border-muted'>
 						<th>R{rowIdx + 1}</th>
 						{row.map((cell, idx) => {
 							const displayPercent =
@@ -43,7 +43,7 @@ const Body = () => {
 						})}
 						<td
 							data-row-sum={rowIdx}
-							className='bg-muted font-medium'
+							className='font-medium bg-muted'
 							title={`Sum: ${rowSum}`}>
 							{rowSum}
 						</td>
