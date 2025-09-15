@@ -7,7 +7,7 @@ import Body from './components/Body';
 import Head from './components/Head';
 
 const Table = () => {
-	const { addRow, setTableParams } = useTableContext();
+	const { tableParams, addRow, setTableParams } = useTableContext();
 	const { setMatrix } = useMatrixContext();
 	const { setStep } = useFormContext();
 
@@ -22,7 +22,10 @@ const Table = () => {
 				</div>
 
 				<div className='flex flex-wrap items-center gap-4'>
-					<Button variant='outline' onClick={addRow}>
+					<Button
+						variant='outline'
+						onClick={addRow}
+						disabled={!tableParams || tableParams.M >= 100}>
 						Add row
 					</Button>
 					<Button
