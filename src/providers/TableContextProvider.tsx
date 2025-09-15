@@ -1,8 +1,8 @@
 import { type ReactNode, useCallback, useMemo, useState } from 'react';
 
-import { TableContext } from '@/context/TableContext';
+import type { Cell, CellId } from '@/context/MatrixContext';
+import { TableContext, type TableParams } from '@/context/TableContext';
 import useMatrixContext from '@/hooks/useMatrixContext';
-import type { Cell, CellId, TableParams } from '@/types/table';
 import { generateId } from '@/utils/generateId';
 import { randomThreeDigit } from '@/utils/randomThreeDigit';
 

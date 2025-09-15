@@ -1,5 +1,5 @@
+import type { TableParams } from '@/context/TableContext';
 import useTableContext from '@/hooks/useTableContext';
-import type { TableParams } from '@/types/table';
 
 const Head = () => {
 	const { tableParams } = useTableContext();

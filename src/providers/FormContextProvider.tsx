@@ -1,10 +1,9 @@
 import { type ReactNode, useCallback, useMemo, useState } from 'react';
 
-import { FormContext } from '@/context/FormContext';
+import { FormContext, type Step } from '@/context/FormContext';
 import useMatrixContext from '@/hooks/useMatrixContext';
 import useTableContext from '@/hooks/useTableContext';
 import { FormValidation } from '@/schemas/form';
-import type { Step } from '@/types/form';
 import { mapZodErrors } from '@/utils/mapZodErrors';
 
 const FormContextProvider = ({ children }: { children: ReactNode }) => {

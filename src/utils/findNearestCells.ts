@@ -1,4 +1,4 @@
-import type { Cell, CellId } from '@/types/table';
+import type { Cell, CellId } from '@/context/MatrixContext';
 
 export function findNearestCells(
 	target: Cell,

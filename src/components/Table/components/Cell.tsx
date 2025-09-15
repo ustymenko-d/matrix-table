@@ -1,7 +1,7 @@
 import clsx from 'clsx';
 
+import type { Cell as TCell } from '@/context/MatrixContext';
 import useTableContext from '@/hooks/useTableContext';
-import type { Cell as TCell } from '@/types/table';
 
 type Props = {
 	cell: TCell;
