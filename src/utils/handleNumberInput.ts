@@ -1,15 +1,27 @@
-const clamp = (v: number, min: number, max: number): number =>
-	Math.max(min, Math.min(max, v));
-
-const sanitizeAndClamp = (value: string, min: number, max: number): number => {
+export const sanitizeAndClamp = (
+	value: string,
+	min: number,
+	max: number
+): number => {
 	const sanitized = value.replace(/^0+(?=\d)/, '');
-	return clamp(+sanitized || 0, min, max);
+	const numeric = +sanitized || min;
+
+	return Math.max(min, Math.min(max, numeric));
 };
 
 export const handleNumberInputChange =
-	(setValue: (val: number) => void, min = 1, max = 100) =>
+	(setValue: (val: number) => void) =>
 	(e: React.FormEvent<HTMLInputElement>) => {
-		const input = e.currentTarget;
-		input.value = input.value.replace(/^0+(?=\d)/, '');
-		setValue(sanitizeAndClamp(input.value, min, max));
+		const value = e.currentTarget.value;
+
+		if (/^\d*$/.test(value)) {
+			setValue(value === '' ? 0 : +value);
+		}
+	};
+
+export const handleNumberInputBlur =
+	(setValue: (val: number) => void, min = 1, max = 100) =>
+	(e: React.FocusEvent<HTMLInputElement>) => {
+		const clamped = sanitizeAndClamp(e.currentTarget.value, min, max);
+		setValue(clamped);
 	};

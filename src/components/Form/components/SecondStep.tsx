@@ -2,7 +2,10 @@ import useFormContext from '@/hooks/useFormContext';
 import Button from '@/ui/Button';
 import Input from '@/ui/Input';
 import Label from '@/ui/Label';
-import { handleNumberInputChange } from '@/utils/handleNumberInput';
+import {
+	handleNumberInputBlur,
+	handleNumberInputChange,
+} from '@/utils/handleNumberInput';
 
 const SecondStep = () => {
 	const { maxX, x, secondStepErrors, step, setX, goPrevStep } =
@@ -18,8 +21,9 @@ const SecondStep = () => {
 					type='number'
 					min={1}
 					max={maxX}
-					value={x}
-					onInput={handleNumberInputChange(setX, 1, maxX)}
+					value={x.toString()}
+					onChange={handleNumberInputChange(setX)}
+					onBlur={handleNumberInputBlur(setX)}
 					errors={secondStepErrors.x}
 				/>
 			</Label>

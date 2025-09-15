@@ -1,33 +1,49 @@
-import { fireEvent, render } from '@testing-library/react';
-import { useState } from 'react';
-import { describe, expect, it } from 'vitest';
+/* eslint-disable @typescript-eslint/no-explicit-any */
+import { describe, expect, it, vi } from 'vitest';
 
-import { handleNumberInputChange } from './handleNumberInput';
+import {
+	handleNumberInputBlur,
+	handleNumberInputChange,
+	sanitizeAndClamp,
+} from './handleNumberInput';
+
+describe('sanitizeAndClamp', () => {
+	it('removes leading zeros and clamps value', () => {
+		expect(sanitizeAndClamp('007', 1, 10)).toBe(7);
+		expect(sanitizeAndClamp('0', 1, 10)).toBe(1);
+		expect(sanitizeAndClamp('15', 1, 10)).toBe(10);
+		expect(sanitizeAndClamp('', 5, 20)).toBe(5);
+	});
+});
 
 describe('handleNumberInputChange', () => {
-	it('sanitizes input and sets clamped value', () => {
-		const TestComponent = () => {
-			const [val, setVal] = useState(0);
+	it('calls setValue with numeric value for digits', () => {
+		const setValue = vi.fn();
+		const handler = handleNumberInputChange(setValue);
 
-			return (
-				<input
-					value={val}
-					onInput={handleNumberInputChange(setVal, 1, 100)}
-					data-testid='input'
-				/>
-			);
-		};
+		handler({ currentTarget: { value: '42' } } as any);
+		expect(setValue).toHaveBeenCalledWith(42);
 
-		const { getByTestId } = render(<TestComponent />);
-		const input = getByTestId('input') as HTMLInputElement;
+		handler({ currentTarget: { value: '' } } as any);
+		expect(setValue).toHaveBeenCalledWith(0);
+	});
+});
 
-		fireEvent.input(input, { target: { value: '0050' } });
-		expect(input.value).toBe('50');
+describe('handleNumberInputBlur', () => {
+	it('sanitizes and clamps value on blur', () => {
+		const setValue = vi.fn();
+		const handler = handleNumberInputBlur(setValue, 1, 100);
 
-		fireEvent.input(input, { target: { value: '200' } });
-		expect(input.value).toBe('100');
+		handler({ currentTarget: { value: '007' } } as any);
+		expect(setValue).toHaveBeenCalledWith(7);
 
-		fireEvent.input(input, { target: { value: '0' } });
-		expect(input.value).toBe('1');
+		handler({ currentTarget: { value: '0' } } as any);
+		expect(setValue).toHaveBeenCalledWith(1);
+
+		handler({ currentTarget: { value: '101' } } as any);
+		expect(setValue).toHaveBeenCalledWith(100);
+
+		handler({ currentTarget: { value: '' } } as any);
+		expect(setValue).toHaveBeenCalledWith(1);
 	});
 });
