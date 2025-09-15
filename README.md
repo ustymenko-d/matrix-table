@@ -8,15 +8,13 @@ This project implements a frontend using **React**, **TypeScript**, and **Vite**
 - Remove and add rows dynamically
 - Build a row heatmap when hovering over sums
 
-**LIVE DEMO**: coming soon
+**LIVE DEMO**: https://matrix-table-beta.vercel.app
 
 ## 🛠️ Technical requirements
 
 - Use **TypeScript** + **React** + **React Context**
 - **Do not use**: Redux, Redux Toolkit, styled-components, UI libraries, css-in-js
 - Deploy production build.
-
-<!-- ## 📁 Project Structure -->
 
 ## 📋 Features
 
