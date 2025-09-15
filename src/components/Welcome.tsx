@@ -2,6 +2,7 @@ import useFormContext from '@/hooks/useFormContext';
 
 const Welcome = () => {
 	const { step } = useFormContext();
+
 	return (
 		<section className='mb-12 px-4 pt-12'>
 			<div className='flex max-w-xl flex-col gap-2'>

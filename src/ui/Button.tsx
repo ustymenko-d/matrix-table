@@ -24,24 +24,22 @@ const Button = ({
 	className,
 	children,
 	...props
-}: Props) => {
-	return (
-		<button
-			className={clsx(
-				'inline-flex h-9 items-center justify-center gap-2 whitespace-nowrap rounded-md text-base font-medium transition-colors',
+}: Props) => (
+	<button
+		className={clsx(
+			'inline-flex h-9 items-center justify-center gap-2 whitespace-nowrap rounded-md text-base font-medium transition-colors',
 
-				'focus-visible:outline-none focus-visible:ring-1 focus-visible:ring-ring disabled:pointer-events-none disabled:cursor-not-allowed disabled:opacity-50',
+			'focus-visible:outline-none focus-visible:ring-1 focus-visible:ring-ring disabled:pointer-events-none disabled:cursor-not-allowed disabled:opacity-50',
 
-				icon ? 'p-2' : 'px-4 py-2',
+			icon ? 'p-2' : 'px-4 py-2',
 
-				variants[variant],
+			variants[variant],
 
-				className
-			)}
-			{...props}>
-			{children}
-		</button>
-	);
-};
+			className
+		)}
+		{...props}>
+		{children}
+	</button>
+);
 
 export default Button;
