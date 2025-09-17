@@ -23,7 +23,7 @@ const SecondStep = () => {
 					max={maxX}
 					value={x.toString()}
 					onChange={handleNumberInputChange(setX)}
-					onBlur={handleNumberInputBlur(setX)}
+					onBlur={handleNumberInputBlur(setX, 1, maxX)}
 					errors={secondStepErrors.x}
 				/>
 			</Label>
